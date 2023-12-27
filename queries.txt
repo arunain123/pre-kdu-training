@@ -1,0 +1,47 @@
+CREATE DATABASE employee;
+
+USE employee;
+
+CREATE TABLE department (
+    department_id INT PRIMARY KEY,
+    department_name VARCHAR(255)
+);
+
+
+CREATE TABLE employee (
+    employee_id INT PRIMARY KEY,
+    employee_name VARCHAR(50),
+    salary DECIMAL(10, 2),
+    department_id INT,
+    FOREIGN KEY (department_id) REFERENCES department(department_id)
+);
+
+INSERT INTO department (department_id, department_name) VALUES
+(1, 'HR'),
+(2, 'Finance'),
+(3, 'IT');
+
+INSERT INTO employee (employee_id, employee_name, salary, department_id) VALUES
+(101, 'John Doe', 50000, 1),
+(102, 'Jane Smith', 60000, 1),
+(103, 'Bob Johnson', 75000, 2),
+(104, 'Alice Williams', 80000, 2),
+(105, 'Charlie Brown', 90000, 3),
+(106, 'Diana Martinez', 95000, 3);
+
+
+-- Query 1
+SELECT e.employee_id, e.employee_name, d.department_name
+FROM employee e
+JOIN department d ON e.department_id = d.department_id;
+
+-- Query 2
+SELECT employee_id, employee_name, salary
+FROM employee
+ORDER BY salary DESC;
+
+-- Query 3
+SELECT d.department_name, AVG(e.salary) AS average_salary
+FROM employee e
+JOIN department d ON e.department_id = d.department_id
+GROUP BY d.department_name;
