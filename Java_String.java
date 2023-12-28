@@ -16,7 +16,7 @@ public class Main
         else{
             System.out.println("The length of the two strings is not the same");
         }
-        if(s1==s2){
+        if(s1.equals(s2)){
             System.out.println("Two strings are equal");
         }
         else{
